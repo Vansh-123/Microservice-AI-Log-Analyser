@@ -1,0 +1,95 @@
+Metadata-Version: 2.4
+Name: logai-cli
+Version: 0.1.0
+Summary: Analyze logs, group similar errors, and suggest fixes from the terminal.
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: python-dotenv>=1.0
+Provides-Extra: ui
+Requires-Dist: streamlit>=1.35; extra == "ui"
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: streamlit>=1.35; extra == "dev"
+
+# LogAI
+
+LogAI is a CLI tool that analyzes application logs, groups similar errors, and provides practical suggestions for fixes.
+
+## Quick Start
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -e ".[dev]"
+logai analyze examples/sample.log
+```
+
+No third-party packages are required for normal CLI usage. Installing the project only gives you the `logai` command shortcut; you can also run `python -m logai.cli analyze examples/sample.log`.
+
+You can also pipe logs:
+
+```powershell
+Get-Content examples/sample.log | logai analyze -
+```
+
+## Examples
+
+Terminal summary:
+
+```powershell
+logai analyze examples/sample.log
+```
+
+JSON output:
+
+```powershell
+logai analyze examples/sample.log --format json
+```
+
+HTML report:
+
+```powershell
+logai analyze examples/sample.log --format html --output report.html
+```
+
+Streamlit UI:
+
+```powershell
+pip install streamlit
+streamlit run streamlit_app.py
+```
+
+In the UI, choose `groq` in the sidebar, paste your Groq API key into the API key field, and click Analyze logs.
+
+AI suggestions with OpenAI-compatible APIs:
+
+```powershell
+$env:OPENAI_API_KEY = "..."
+logai analyze examples/sample.log --ai-provider openai --ai-model gpt-4.1-mini
+```
+
+Groq:
+
+```powershell
+$env:GROQ_API_KEY = "..."
+logai analyze examples/sample.log --ai-provider groq --ai-model llama-3.3-70b-versatile
+```
+
+Local Ollama:
+
+```powershell
+logai analyze examples/sample.log --ai-provider ollama --ai-model llama3.1
+```
+
+## Current Capabilities
+
+- Auto-detects JSON, Apache/Nginx access logs, syslog, and plain text.
+- Preserves multiline stack traces and JSON objects.
+- Extracts severity, timestamps, paths, line numbers, request IDs, functions, and exception names.
+- Groups similar errors by normalizing dynamic values such as IDs, UUIDs, IPs, paths, and quoted strings.
+- Emits terminal output, JSON, or an interactive HTML report.
+- Supports OpenAI-compatible APIs, Groq, and Ollama, with retries, concurrency control, and response caching.
+
+## Project Status
+
+This is a strong MVP foundation. Provider stubs for Claude, Gemini, and AWS Bedrock are represented as configuration errors until their SDK/API integrations are added.

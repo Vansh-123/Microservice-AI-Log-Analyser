@@ -1,0 +1,2 @@
+[console_scripts]
+logai = logai.cli:main

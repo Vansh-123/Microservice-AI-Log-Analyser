@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "logai-cli"
+version = "0.1.0"
+description = "Analyze logs, group similar errors, and suggest fixes from the terminal."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["python-dotenv>=1.0"]
+
+[project.optional-dependencies]
+ui = ["streamlit>=1.35"]
+dev = ["pytest>=8.0", "streamlit>=1.35"]
+
+[project.scripts]
+logai = "logai.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["logai*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

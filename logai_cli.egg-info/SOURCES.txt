@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+logai/__init__.py
+logai/ai.py
+logai/cli.py
+logai/grouping.py
+logai/models.py
+logai/parsers.py
+logai/reporting.py
+logai_cli.egg-info/PKG-INFO
+logai_cli.egg-info/SOURCES.txt
+logai_cli.egg-info/dependency_links.txt
+logai_cli.egg-info/entry_points.txt
+logai_cli.egg-info/requires.txt
+logai_cli.egg-info/top_level.txt
+tests/test_grouping.py
+tests/test_parsers.py
